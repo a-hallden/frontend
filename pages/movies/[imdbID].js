@@ -18,7 +18,6 @@ class MovieDetail extends React.Component {
     const {
       movieDetail: { result, loading, error },
     } = this.props;
-    console.log("result", result, loading);
 
     return (
       <Layout>
