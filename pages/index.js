@@ -32,10 +32,7 @@ class Home extends React.Component {
             <MovieListItem
               movie={movie}
               key={movie.imdbID}
-              addToFavorites={(value) => {
-                console.log("ADDING", value);
-                addToFavorites(value);
-              }}
+              addToFavorites={(value) => addToFavorites(value)}
             />
           ))}
         </StyledRow>
