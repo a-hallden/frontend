@@ -16,6 +16,9 @@ export const {
   getMovieDetail,
   getMovieDetailSuccess,
   getMovieDetailError,
+  createNewFavorites,
+  createNewFavoritesSuccess,
+  createNewFavoritesError,
 } = createActions({
   SEARCH: (dispatch, searchTerm) => {
     const url = "";
@@ -53,4 +56,13 @@ export const {
   },
   GET_MOVIE_DETAIL_SUCCESS: (payload) => payload,
   GET_MOVIE_DETAIL_ERROR: (error) => error,
+  CREATE_NEW_FAVORITES: (dispatch, payload) => {
+    const url = "favorites/";
+    requestsHelper
+      .doUnauthenticatedPost(url, payload)
+      .then((response) => dispatch(getNewFavoritesSuccess(response)))
+      .catch((error) => dispatch(getNewFavoritesError(error)));
+  },
+  CREATE_NEW_FAVORITES_SUCCESS: (payload) => payload,
+  CREATE_NEW_FAVORITES_ERROR: (error) => error,
 });

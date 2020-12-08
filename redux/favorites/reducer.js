@@ -118,6 +118,14 @@ const favoriteReducer = handleActions(
         error: action.error,
       },
     }),
+    [actions.createNewFavoritesSuccess]: (state, action) => ({
+      ...state,
+      favorites: {
+        result: state.favorites.result.push(action.payload),
+        loading: false,
+        error: false,
+      },
+    }),
   },
   defaultState
 );
