@@ -163,7 +163,7 @@ export default class {
   }
 
   _getBaseURL() {
-    return "http://yoshi.willandskill.eu:8777"; // dev
+    return "url goes here"; // dev
   }
 
   _getApiURL() {
