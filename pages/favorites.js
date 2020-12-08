@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Link from "next/link";
 import * as actions from "../redux/favorites/actions";
 import styled from "styled-components";
+import { Button } from "reactstrap";
 
 const Title = styled.span`
   font-size: 24px;
@@ -12,6 +13,18 @@ const Title = styled.span`
 
 const MovieTitle = styled(Link)`
   font-size: 18px;
+`;
+
+const DeleteButton = styled(Button)`
+  float: right;
+  font-size: 18px;
+  color: white;
+`;
+
+const FavoritesContainer = styled.div`
+  margin-top: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
 `;
 
 class Favorites extends React.Component {
@@ -31,10 +44,11 @@ class Favorites extends React.Component {
   );
 
   renderFavorite = (favorite) => (
-    <div key={favorite.id}>
+    <FavoritesContainer key={favorite.id}>
       <Title>{favorite.name}</Title>
+      <DeleteButton color="danger">X</DeleteButton>
       {favorite.movies.map((movie) => this.renderMovie(movie))}
-    </div>
+    </FavoritesContainer>
   );
 
   renderFavorites = () => {
@@ -51,13 +65,15 @@ class Favorites extends React.Component {
 
   onChange = ({ target: { value } }) => this.setState({ favoritesName: value });
 
+  createNewFavorites = () =>
+    this.props.createNewFavorites({ name: this.state.favoritesName });
+
   render() {
     const { favoritesName } = this.state;
     return (
       <Layout>
-        <button onClick={() => console.log(this.state)}>state</button>
         <input type="text" value={favoritesName} onChange={this.onChange} />
-        <button onClick={this.createFavorites}>Lägg till ny</button>
+        <button onClick={this.createNewFavorites}>Lägg till ny</button>
         {this.renderFavorites()}
       </Layout>
     );
@@ -70,8 +86,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getFavorites: () => dispatch(actions.getFavorites(dispatch)),
-  createNewFavorite: (name) =>
-    dispatch(actions.createNewFavorite(dispatch, name)),
+  createNewFavorites: (payload) =>
+    dispatch(actions.createNewFavorites(dispatch, payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
