@@ -1,7 +1,16 @@
-import '../styles/globals.css'
+import { Provider } from "react-redux";
+import initializeStore from "../redux/store";
+import withRedux from "next-redux-wrapper";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import "../styles/globals.css";
+
+function MyApp({ Component, pageProps, store }) {
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
-export default MyApp
+export default withRedux(initializeStore)(MyApp);
