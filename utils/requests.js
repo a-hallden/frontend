@@ -1,5 +1,4 @@
 import axios from "axios";
-import routing from "./routing";
 
 const AUTH_TOKEN_KEY = "@AUTH_TOKEN";
 const USER_ID_KEY = "@USER_ID";
@@ -78,7 +77,7 @@ export default class {
     localStorage.setItem(USER_EMAIL_KEY, "");
     localStorage.setItem(USER_FIRST_NAME_KEY, "");
     localStorage.setItem(USER_LAST_NAME_KEY, "");
-    routing.index({ push: true });
+    // routing.index({ push: true });
   }
 
   async localStorageTokenIsValid() {
